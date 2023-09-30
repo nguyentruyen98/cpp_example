@@ -1,22 +1,23 @@
-// #include "OrderItem.h"
 
 class Product : public OrderItem
 {
+private:
+    double itemPrice;
 
 public:
     int quantity;
-    Product(int initID, string initName, int initUnitPrice, string initDescription, string initCategory, int initQuantity)
-    {
-        ID = initID;
-        name = initName;
-        unitPrice = initUnitPrice;
-        description = initDescription;
-        category = initCategory;
-        quantity = initQuantity;
-    };
+    Product(int id, const std::string &n, int price, const std::string &desc, const std::string &cat, int quan) : OrderItem(id, n, price, desc, cat), quantity(quan){};
 
+    double getItemPrice() override
+    {
+        calculatePrice();
+        return itemPrice;
+    }
+
+private:
     void calculatePrice() override
     {
-        cout << "Product price: " << quantity * unitPrice << endl;
+        itemPrice = quantity * unitPrice;
+        cout << "Product price: " << itemPrice << endl;
     }
 };
